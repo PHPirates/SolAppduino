@@ -163,53 +163,68 @@ void getTimes(double *times, double locationLatitude,
     double lw = rad * -locationLongitude; // what is lw?
     double phi = rad * locationLatitude;
     //int d = secondsToDays(); //days since epoch, gets current time in millis
-    double d = 6030.04;
+    double d = 6030.04; //TODO debug magik
     int n = julianCycle(d,lw);
     double ds = approxTransit(0,lw,n); //n=6030?
     double M = solarMeanAnomaly(ds);
     double L = eclipticLongitude(M);
     double dec = declination(L, 0); //uses asin
     double Jnoon = solarTransitJ(ds, M, L);
+
+    //TODO
+    /*
+    first test if getSetJ is precise enough given values below
+    then make sure the values are as below
+    //TODO can't change h=-0.01 to h*10000=-145, because sin(h/10000) won't work: h/10000 = 0...
+    //same with dec and L
+
+    given getSetJ precise as in js:
+    dec needs 0.3970
+    L needs 114.90
+    h needs -0.0145
+    */
+
     //result
     Serial.println(-0.833 * rad); //-0.01
     Serial.println(lw); //-0.08
     Serial.println(phi); //0.90
-    Serial.println(dec); //0.30 //uses asin
+    Serial.println(dec); //0.30 //uses asin //to .40 as in js has no effect
     Serial.println(n); //6030
     Serial.println(M); //109.97
-    Serial.println(L); //113.95
+    Serial.println(L); //113.95 //to 114.91 as in js has no effect
     Serial.println();
     unsigned long Jset = getSetJ(-0.833 * rad, lw, phi, dec, n, M, L);
-    //Jset is 2457575.25 ?? instead of 2,457,575,335 as in the .js
-    unsigned long JsetJs = 2457596320; //is Jset * 1000, from js. 10 is about 15mins, 1 about 1.5 mins (accurate enough)
-    long sunsetSeconds = (JsetJs + 500 - 2440588000) * 36 * 2.4; //*24 and then /10 doesn't work.
+    //Jset is 2,457,575,168 instead of 2,457,575,335 as in the .js
+    // needs exact precision
+    unsigned long JsetJs = 2457596320;
+    //is Jset * 1000, from js (newer than above).
+    //10 is about 15mins, 1 about 1.5 mins (accurate enough)
+    long sunsetSeconds = fromJulian(JsetJs);
 }
 
-//tested
 double julianCycle(double d, double lw) {
   //first adding half and then casting to int is equal to rounding
   return (int)((d - 0.0009 - ( lw / (2 * PI) ) ) + 0.5);
 }
 
-//tested
 double approxTransit(double Ht, double lw, double n) {
   return 0.0009 + (Ht + lw) / (2 * PI) + n;
 }
 
-//tested
 double solarTransitJ(double ds, double M, double L) {
   return 2451545 + ds + 0.0053 * sin(M) - 0.0069 * sin(2 * L);
 }
 
-//tested
-//returns time in seconds
+//warning! returns time in seconds, in contrary to js
 long fromJulian(double j) {
-  return (j + 0.5 - 2440588)  * 60 * 60 * 24;
+  return (j + 500 - 2440588000) * 36 * 2.4;
+  //*24 and then /10 doesn't work.
 }
 
 unsigned long getSetJ(double h, double lw, double phi, double dec,
   double n, double M, double L) {
-  double w = hourAngle(h, phi, dec); //2.00 compared to 1.99 from .js
+  //double w = hourAngle(h, phi, dec); //2.00 compared to 1.99 from .js
+  double w = 2.00; //TODO debug magik
   double a = approxTransit(w, lw, n);
   return solarTransitJ(a, M, L)*1000; //should be a long to retain enough precision
 }
