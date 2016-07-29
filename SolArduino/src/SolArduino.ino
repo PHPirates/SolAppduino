@@ -49,16 +49,23 @@ TimeChangeRule summerTime = {"UTC+1", Last, Sun, Mar, 2, +120};
 TimeChangeRule winterTime = {"UTC+2", Last, Sun, Oct, 3, +60};
 Timezone timeZone(summerTime, winterTime);
 
+const char website[] PROGMEM = "http://hollandpirates.bitbucket.org";
+
+// called when the client request is complete
+static void my_callback (byte status, word off, word len) {
+  Serial.println(">>>");
+  Ethernet::buffer[off+300] = 0;
+  Serial.print((const char*) Ethernet::buffer + off);
+  Serial.println("...");
+}
+
 void setup () {
+  Serial.begin(9600);
   pinMode(POWER_HIGH,OUTPUT);
   pinMode(DIRECTION_PIN,OUTPUT);
   pinMode(POWER_LOW,OUTPUT);
 
   solarPanelStop();
-
-  Serial.begin(9600);
-
-
   //do not forget to add the extra '10' argument because of this ethernet shield
   if (ether.begin(sizeof Ethernet::buffer, mymac, 10) == 0) {
     Serial.println(F("Failed to access Ethernet controller"));
@@ -66,16 +73,10 @@ void setup () {
   ether.staticSetup(myip);
   //no serial print because ether.myip is a char[] array
   ether.printIp("Address: http://", ether.myip);
-}
 
-  Serial.println(F("Setting up DHCP"));
-  if (!ether.dhcpSetup())
-    Serial.println(F("DHCP failed"));
+  Serial.print("<<< REQ ");
+  ether.browseUrl(PSTR(""), "", website, my_callback);
 
-  ether.printIp("My IP: ", ether.myip);
-  ether.printIp("Netmask: ", ether.netmask);
-  ether.printIp("GW IP: ", ether.gwip);
-  ether.printIp("DNS IP: ", ether.dnsip);
 }
 
 void loop () {
