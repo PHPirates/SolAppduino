@@ -27,7 +27,6 @@ static byte myip[] = {192, 168, 2, 10};// ip Thomas
 // static byte myip[] = {192, 168, 0, 23}; // ip Abby
 
 byte Ethernet::buffer[500];
-
 BufferFiller bfill;   //used in every http response sent
 
 //to be reused in every http response sent
@@ -49,14 +48,23 @@ TimeChangeRule summerTime = {"UTC+1", Last, Sun, Mar, 2, +120};
 TimeChangeRule winterTime = {"UTC+2", Last, Sun, Oct, 3, +60};
 Timezone timeZone(summerTime, winterTime);
 
+//making http get request for sunrise/sunset
 const char website[] PROGMEM = "http://hollandpirates.bitbucket.org";
+boolean dataReceived; //to check if data is received from the http get request
+char response[] = "No response";
 
 // called when the client request is complete
 static void my_callback (byte status, word off, word len) {
   Serial.println(">>>");
   Ethernet::buffer[off+300] = 0;
-  Serial.print((const char*) Ethernet::buffer + off);
+  const char* response2 = (const char*) Ethernet::buffer + off;
+  //copy data to response?
+  strncpy(response,response2,sizeof(response));
+  response[sizeof(response)-1]=0;
+  // Serial.print((const char*) Ethernet::buffer + off);
+  Serial.println(response);
   Serial.println("...");
+  dataReceived = true;
 }
 
 void setup () {
@@ -73,9 +81,6 @@ void setup () {
   ether.staticSetup(myip);
   //no serial print because ether.myip is a char[] array
   ether.printIp("Address: http://", ether.myip);
-
-  Serial.print("<<< REQ ");
-  ether.browseUrl(PSTR(""), "", website, my_callback);
 
 }
 
@@ -320,4 +325,16 @@ double azimuth(double h, double phi, double sun) {
 
 double altitude(double h, double phi, double sun) {
   return asin(sin(phi) * sin(sun) + cos(phi) * cos(sun) * cos(h));
+}
+
+void getSunTimes(int *times) {
+  //make get request
+  dataReceived = false;
+  Serial.print("<<< REQ ");
+  ether.browseUrl(PSTR(""), "", website, my_callback);
+  while(!dataReceived) { //global boolean
+    delay(1); //wait until response is back
+  }
+  Serial.println("data received:");
+  Serial.println(response);
 }
