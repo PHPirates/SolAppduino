@@ -131,7 +131,7 @@ double solarMeanAnomaly(double days) {
   return rad * (357.5291 + 0.98560028 * days);
 }
 
-double eclipticLongitude(int mean) {
+double eclipticLongitude(double mean) {
   double center = rad * (sin(mean) + 0.02 * sin(2 * mean) + 0.0003 * sin(3 * mean));
   double perihelion = rad * 102.9372;
 
@@ -177,7 +177,7 @@ void getTimes(double *times, double locationLatitude,
 
     given getSetJ precise as in js:
     dec needs 0.3970
-    L needs 114.90
+    L needs 114.90 //done
     h needs -0.0145
     (getSetJ) w needs 2.158
     */
@@ -187,10 +187,10 @@ void getTimes(double *times, double locationLatitude,
     Serial.println(h); //-0.01
     Serial.println(lw); //-0.08
     Serial.println(phi); //0.90
-    Serial.println(dec); //0.30 //uses asin //to .40 as in js has no effect
+    Serial.println(dec); //0.30 //uses asin
     Serial.println(n); //6030
     Serial.println(M); //109.97
-    Serial.println(L); //113.95 //to 114.91 as in js has no effect
+    Serial.println(L); //114.90
     Serial.println();
     unsigned long Jset = getSetJ(h, lw, phi, dec, n, M, L);
     unsigned long JsetJs = 2457596320;

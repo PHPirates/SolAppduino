@@ -54,6 +54,8 @@
 
 				var C = rad * (1.9148 * sin(M) + 0.02 * sin(2 * M) + 0.0003 * sin(3 * M)), // equation of center
 					P = rad * 102.9372; // perihelion of the Earth
+					
+				document.write("M: "+M+"<br>C: "+C+"<br>P: "+P);
 
 				return M + C + P + PI;
 			}
@@ -175,15 +177,16 @@
 			var sunset = times.sunset.getHours() + ':' + times.sunset.getMinutes();
 			
 			document.write("date in ms: " + date.valueOf() + "<br>Sunrise: " + sunrise + "<br>Sunset: " + sunset );
-			document.write("<br>sT "+ (2451545 + 6030.332 ));
+			document.write("<br>eL "+ eclipticLongitude(109.968) );
 		
+			
 			
 			//var test = getSetJ(-0.01,-0.08,0.90,0.30,6030,109.97,113.95);
 			//document.write("<br>"+times.sunset);
 			
-			var h = -0.01,
-				phi = 0.90,
-				dec = 0.30;
+			//var h = -0.01,
+			//	phi = 0.90,
+			//	dec = 0.30;
 			//document.write("<br>acos("+acos( (sin(h) - sin (phi) * sin (d)) / (cos(phi) * cos(d)) ) ) ;
 			//document.write("<br>acos("+hourAngle(h,phi,dec) ) ;
 		</script>
