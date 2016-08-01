@@ -173,19 +173,18 @@ void getTimes(double *times, double locationLatitude,
 
     //TODO
     /*
-    first test if getSetJ is precise enough given values below
-    then make sure the values are as below
-    //TODO can't change h=-0.01 to h*10000=-145, because sin(h/10000) won't work: h/10000 = 0...
-    //same with dec and L
+    make sure the values are as below
 
     given getSetJ precise as in js:
     dec needs 0.3970
     L needs 114.90
     h needs -0.0145
+    (getSetJ) w needs 2.158
     */
 
     //result
-    Serial.println(-0.833 * rad); //-0.01
+    double h = -0.833 * rad;
+    Serial.println(h); //-0.01
     Serial.println(lw); //-0.08
     Serial.println(phi); //0.90
     Serial.println(dec); //0.30 //uses asin //to .40 as in js has no effect
@@ -193,9 +192,7 @@ void getTimes(double *times, double locationLatitude,
     Serial.println(M); //109.97
     Serial.println(L); //113.95 //to 114.91 as in js has no effect
     Serial.println();
-    unsigned long Jset = getSetJ(-0.833 * rad, lw, phi, dec, n, M, L);
-    //Jset is 2,457,575,168 instead of 2,457,575,335 as in the .js
-    // needs exact precision
+    unsigned long Jset = getSetJ(h, lw, phi, dec, n, M, L);
     unsigned long JsetJs = 2457596320;
     //is Jset * 1000, from js (newer than above).
     //10 is about 15mins, 1 about 1.5 mins (accurate enough)
@@ -211,8 +208,12 @@ double approxTransit(double Ht, double lw, double n) {
   return 0.0009 + (Ht + lw) / (2 * PI) + n;
 }
 
-double solarTransitJ(double ds, double M, double L) {
-  return 2451545 + ds + 0.0053 * sin(M) - 0.0069 * sin(2 * L);
+unsigned long solarTransitJ(double ds, double M, double L) {
+	//2451545 + 6030.332 was a problem, result had too much digits for double to be precise...
+	//fix is to do everything times 1000 and cast to long and eventually unsigned long
+	//which is just long enough to contain for example 2457575335
+	//unsigned long + 6030.332*1000 to long + round (sth with sin,cos)*1000
+	return 2451545000 + (long) (ds * 1000)  + (int) ( ( 0.0053 * sin(M) - 0.0069 * sin(2 * L) ) * 1000 + 0.5 );
 }
 
 //warning! returns time in seconds, in contrary to js
@@ -224,9 +225,9 @@ long fromJulian(double j) {
 unsigned long getSetJ(double h, double lw, double phi, double dec,
   double n, double M, double L) {
   //double w = hourAngle(h, phi, dec); //2.00 compared to 1.99 from .js
-  double w = 2.00; //TODO debug magik
+  double w = 2.158; //TODO debug magik
   double a = approxTransit(w, lw, n);
-  return solarTransitJ(a, M, L)*1000; //should be a long to retain enough precision
+  return solarTransitJ(a, M, L); //should be a long to retain enough precision
 }
 
 //uses acos
