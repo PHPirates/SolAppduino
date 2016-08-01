@@ -95,9 +95,10 @@ void getSunPosition(double *position, double locationLatitude,
 }
 
 
-int secondsToDays() {
+double secondsToDays() {
   long currentTime = now(); //get current time in seconds
-  return currentTime / daySecs - 0.5 + 2440588 - 2451545;
+  return ((double)((currentTime) / (36*2.4) - 500 - 10957000))/1000.0;
+ //take care to not overflow, and avoid integer division when dividing by 100 again
 }
 
 unsigned long getNtpTime() {
@@ -162,8 +163,9 @@ void getTimes(double *times, double locationLatitude,
   double locationLongitude) {
     double lw = rad * -locationLongitude; // what is lw?
     double phi = rad * locationLatitude;
-    //int d = secondsToDays(); //days since epoch, gets current time in millis
-    double d = 6030.04; //TODO debug magik
+    //long d = secondsToDays(); //days since epoch*1000, gets current time in seconds
+    //TODO convert long to double
+    double d = 6030.040; //TODO debug magik
     int n = julianCycle(d,lw);
     double ds = approxTransit(0,lw,n); //n=6030?
     double M = solarMeanAnomaly(ds);
@@ -178,13 +180,12 @@ void getTimes(double *times, double locationLatitude,
     given getSetJ precise as in js:
     dec needs 0.3970
     L needs 114.90 //done
-    h needs -0.0145
     (getSetJ) w needs 2.158
     */
 
     //result
     double h = -0.833 * rad;
-    Serial.println(h); //-0.01
+    Serial.println(h); //-0.0145
     Serial.println(lw); //-0.08
     Serial.println(phi); //0.90
     Serial.println(dec); //0.30 //uses asin

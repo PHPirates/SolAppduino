@@ -177,7 +177,8 @@
 			var sunset = times.sunset.getHours() + ':' + times.sunset.getMinutes();
 			
 			document.write("date in ms: " + date.valueOf() + "<br>Sunrise: " + sunrise + "<br>Sunset: " + sunset );
-			document.write("<br>eL "+ eclipticLongitude(109.968) );
+			document.write("<br>dec "+ asin(0.38661) );
+			document.write("<br>w "+ acos(-0.55355) );
 		
 			
 			
@@ -188,7 +189,7 @@
 			//	phi = 0.90,
 			//	dec = 0.30;
 			//document.write("<br>acos("+acos( (sin(h) - sin (phi) * sin (d)) / (cos(phi) * cos(d)) ) ) ;
-			//document.write("<br>acos("+hourAngle(h,phi,dec) ) ;
+			//document.write("<br>dec("+hourAngle(h,phi,dec) ) ;
 		</script>
 	</body>
 </html>
