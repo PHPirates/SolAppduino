@@ -176,7 +176,7 @@
 			var sunrise = times.sunrise.getHours() + ':' + times.sunrise.getMinutes();
 			var sunset = times.sunset.getHours() + ':' + times.sunset.getMinutes();
 			
-			document.write("date in ms: " + date.valueOf() + "<br>Sunrise: " + sunrise + "<br>Sunset: " + sunset );
+			document.write("date in ms: " + date.valueOf() + "<br>Sunrise: " + toDays(times.sunrise) + "<br>Sunset: " + toDays(times.sunset) );
 			document.write("<br>dec "+ asin(0.38661) );
 			document.write("<br>w "+ acos(-0.55355) );
 		

@@ -54,6 +54,11 @@ void setup () {
   //
   // //sync arduino clock, current time in seconds can be found with now();
   // setTime(getNtpTime());
+
+  long times[2];
+  getTimes(&times[0],locationLatitude,locationLongitude);
+  Serial.println(times[0]);
+  Serial.println(times[1]);
 }
 
 void loop () {
@@ -61,9 +66,6 @@ void loop () {
   // Serial.println(now());
   // Serial.println("azimuth, altitude");
   // getSunPosition(&position[0], locationLatitude, locationLongitude);
-  double times[2];
-  getTimes(&times[0],locationLatitude,locationLongitude);
-  delay(60000);
 }
 
 void getSunPosition(double *position, double locationLatitude,
@@ -71,7 +73,7 @@ void getSunPosition(double *position, double locationLatitude,
 
     double lw = rad * -locationLongitude; // what is lw?
     double phi = rad * locationLatitude;
-    //int days = secondsToDays(); //days since epoch, gets current time in millis
+    //int days = secondsToDays(); //days since 2000, -0.5 or something
     days = 6030.036844594906;
 
     double sun[2];
@@ -95,9 +97,8 @@ void getSunPosition(double *position, double locationLatitude,
 }
 
 
-double secondsToDays() {
-  long currentTime = now(); //get current time in seconds
-  return ((double)((currentTime) / (36*2.4) - 500 - 10957000))/1000.0;
+double secondsToDays(long seconds) {
+  return ((double)((seconds) / (36*2.4) - 500 - 10957000))/1000.0;
  //take care to not overflow, and avoid integer division when dividing by 100 again
 }
 
@@ -159,13 +160,16 @@ double altitude(double h, double phi, double sun) {
   return asin(sin(phi) * sin(sun) + cos(phi) * cos(sun) * cos(h));
 }
 
-void getTimes(double *times, double locationLatitude,
+/*returns an array with first today's sunrise in days,
+then the hoursOfDay of the sunset, and then minutes.*/
+void getTimes(long *times, double locationLatitude,
   double locationLongitude) {
+
     double lw = rad * -locationLongitude; // what is lw?
     double phi = rad * locationLatitude;
     //long d = secondsToDays(); //days since epoch*1000, gets current time in seconds
     //TODO convert long to double
-    double d = 6030.040; //TODO debug magik
+    double d = 6030.037; //TODO debug magik
     int n = julianCycle(d,lw);
     double ds = approxTransit(0,lw,n); //n=6030?
     double M = solarMeanAnomaly(ds);
@@ -194,10 +198,13 @@ void getTimes(double *times, double locationLatitude,
     Serial.println(L); //114.90
     Serial.println();
     unsigned long Jset = getSetJ(h, lw, phi, dec, n, M, L);
-    unsigned long JsetJs = 2457596320;
-    //is Jset * 1000, from js (newer than above).
+    unsigned long Jrise = Jnoon - (Jset - Jnoon);
     //10 is about 15mins, 1 about 1.5 mins (accurate enough)
-    long sunsetSeconds = fromJulian(JsetJs);
+
+    //convert to seconds since epoch
+    times[0] = (long) fromJulian(Jrise);
+    times[1] = (long) fromJulian(Jset);
+
 }
 
 double julianCycle(double d, double lw) {
@@ -217,7 +224,7 @@ unsigned long solarTransitJ(double ds, double M, double L) {
 	return 2451545000 + (long) (ds * 1000)  + (int) ( ( 0.0053 * sin(M) - 0.0069 * sin(2 * L) ) * 1000 + 0.5 );
 }
 
-//warning! returns time in seconds, in contrary to js
+//warning! returns time in seconds, contrary to js
 long fromJulian(double j) {
   return (j + 500 - 2440588000) * 36 * 2.4;
   //*24 and then /10 doesn't work.
@@ -225,13 +232,12 @@ long fromJulian(double j) {
 
 unsigned long getSetJ(double h, double lw, double phi, double dec,
   double n, double M, double L) {
-  //double w = hourAngle(h, phi, dec); //2.00 compared to 1.99 from .js
+  //double w = hourAngle(h, phi, dec);
   double w = 2.158; //TODO debug magik
   double a = approxTransit(w, lw, n);
   return solarTransitJ(a, M, L); //should be a long to retain enough precision
 }
 
-//uses acos
 double hourAngle(double h, double phi, double d) {
   return acos((sin(h) - sin (phi) * sin (d)) / (cos(phi) * cos(d)));
 }
