@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      8966,        216]
-NotebookOptionsPosition[      8423,        193]
-NotebookOutlinePosition[      8764,        208]
-CellTagsIndexPosition[      8721,        205]
+NotebookDataLength[     12352,        310]
+NotebookOptionsPosition[     11615,        281]
+NotebookOutlinePosition[     11956,        296]
+CellTagsIndexPosition[     11913,        293]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -24,12 +24,11 @@ Cell[BoxData[
  RowBox[{
   RowBox[{"(*", " ", 
    RowBox[{
-   "Convert", " ", "from", " ", "days", " ", "back", " ", "into", " ", 
-    "date"}], " ", "*)"}], "\[IndentingNewLine]", 
+   "TODO", " ", "Convert", " ", "from", " ", "days", " ", "back", " ", "into",
+     " ", "date"}], " ", "*)"}], "\[IndentingNewLine]", 
   RowBox[{
    RowBox[{
-    RowBox[{"d", " ", "=", " ", 
-     RowBox[{"6030.33", "+", "0.5"}]}], ";"}], "\[IndentingNewLine]", 
+    RowBox[{"d", " ", "=", " ", "6030.335"}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"FromUnixTime", "[", " ", 
     RowBox[{
      RowBox[{"d", "*", "60", "*", "60", "*", "24"}], " ", "+", " ", 
@@ -63,10 +62,13 @@ Cell[BoxData[
    3.6792300589881487`*^9}, {3.6792305410050464`*^9, 
    3.6792305424941297`*^9}, {3.679230618542229*^9, 3.6792306200162773`*^9}, {
    3.6792306570976562`*^9, 3.6792306823596134`*^9}, 3.6792308351072617`*^9, {
-   3.6792308728261228`*^9, 3.679230899720249*^9}}],
+   3.6792308728261228`*^9, 3.679230899720249*^9}, {3.679232082705018*^9, 
+   3.6792320834541655`*^9}, {3.679232168785967*^9, 3.679232169411975*^9}, {
+   3.679232209104192*^9, 3.6792322133899045`*^9}, {3.6792322964211254`*^9, 
+   3.6792323149160986`*^9}}],
 
 Cell[BoxData[
- TemplateBox[{RowBox[{"\"Tue 5 Jul 2016 19:55:12\"", 
+ TemplateBox[{RowBox[{"\"Tue 5 Jul 2016 08:02:24\"", 
      StyleBox[
       RowBox[{"\"GMT+\"", "\[InvisibleSpace]", "3.`"}], FontColor -> 
       GrayLevel[0.5]]}],RowBox[{"DateObject", "[", 
@@ -76,7 +78,7 @@ Cell[BoxData[
        RowBox[{"TimeObject", "[", 
          RowBox[{
            RowBox[{"{", 
-             RowBox[{"19", ",", "55", ",", "12.`"}], "}"}], ",", 
+             RowBox[{"8", ",", "2", ",", "24.`"}], "}"}], ",", 
            RowBox[{"TimeZone", "\[Rule]", "3.`"}]}], "]"}], ",", 
        RowBox[{"TimeZone", "\[Rule]", "3.`"}]}], "]"}]},
   "DateObject",
@@ -94,20 +96,22 @@ Cell[BoxData[
    3.679229318278219*^9}, {3.679229486671005*^9, 3.6792295282545986`*^9}, 
    3.6792299092856455`*^9, {3.6792300415817647`*^9, 3.679230059779711*^9}, 
    3.679230543821046*^9, 3.679230622737213*^9, 3.6792306632289953`*^9, 
-   3.6792307334309597`*^9, 3.679230900721939*^9}],
+   3.6792307334309597`*^9, 3.679230900721939*^9, 3.6792321706849704`*^9, {
+   3.6792322104983835`*^9, 3.6792322139648123`*^9}, {3.6792322970520935`*^9, 
+   3.6792323154436398`*^9}}],
 
 Cell[BoxData[
- TemplateBox[{RowBox[{"\"Wed 6 Jul 2016 10:55:12\"", 
+ TemplateBox[{RowBox[{"\"Tue 5 Jul 2016 23:02:24\"", 
      StyleBox[
       RowBox[{"\"GMT+\"", "\[InvisibleSpace]", "3.`"}], FontColor -> 
       GrayLevel[0.5]]}],RowBox[{"DateObject", "[", 
      RowBox[{
        RowBox[{"{", 
-         RowBox[{"2016", ",", "7", ",", "6"}], "}"}], ",", 
+         RowBox[{"2016", ",", "7", ",", "5"}], "}"}], ",", 
        RowBox[{"TimeObject", "[", 
          RowBox[{
            RowBox[{"{", 
-             RowBox[{"10", ",", "55", ",", "12.`"}], "}"}], ",", 
+             RowBox[{"23", ",", "2", ",", "24.`"}], "}"}], ",", 
            RowBox[{"TimeZone", "\[Rule]", "3.`"}]}], "]"}], ",", 
        RowBox[{"TimeZone", "\[Rule]", "3.`"}]}], "]"}]},
   "DateObject",
@@ -125,7 +129,9 @@ Cell[BoxData[
    3.679229318278219*^9}, {3.679229486671005*^9, 3.6792295282545986`*^9}, 
    3.6792299092856455`*^9, {3.6792300415817647`*^9, 3.679230059779711*^9}, 
    3.679230543821046*^9, 3.679230622737213*^9, 3.6792306632289953`*^9, 
-   3.6792307334309597`*^9, 3.679230900735956*^9}]
+   3.6792307334309597`*^9, 3.679230900721939*^9, 3.6792321706849704`*^9, {
+   3.6792322104983835`*^9, 3.6792322139648123`*^9}, {3.6792322970520935`*^9, 
+   3.6792323154746714`*^9}}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -147,18 +153,18 @@ Cell[BoxData[
        RowBox[{"2016", ",", "7", ",", "5"}], "}"}]}], "]"}]}], 
    "\[IndentingNewLine]", 
    RowBox[{"UnixTime", "[", "sunset", "]"}], "\[IndentingNewLine]", 
-   RowBox[{"(", 
+   RowBox[{
     RowBox[{
-     RowBox[{
-      RowBox[{"(", 
-       RowBox[{"UnixTime", "[", "sunset", "]"}], ")"}], "/", 
-      RowBox[{"(", 
-       RowBox[{"3600", "*", "24"}], ")"}]}], "-", "0.5", "-", "10957"}], 
-    ")"}]}]}]], "Input",
+     RowBox[{"(", 
+      RowBox[{"UnixTime", "[", "sunset", "]"}], ")"}], "/", 
+     RowBox[{"(", 
+      RowBox[{"3600", "*", "24"}], ")"}]}], "-", "0.5", "-", 
+    "10957"}]}]}]], "Input",
  CellChangeTimes->{{3.679229715663906*^9, 3.6792297312930264`*^9}, {
   3.679229992864131*^9, 3.679230016031612*^9}, {3.67923068899032*^9, 
   3.6792307226952977`*^9}, {3.679230792172748*^9, 3.6792308153382483`*^9}, {
-  3.67923113639262*^9, 3.6792311367358656`*^9}}],
+  3.67923113639262*^9, 3.6792311367358656`*^9}, {3.6792321175876927`*^9, 
+  3.679232119909333*^9}}],
 
 Cell[BoxData[
  TemplateBox[{RowBox[{"\"Tue 5 Jul 2016 23:02\"", 
@@ -189,6 +195,88 @@ Cell[BoxData["6030.334722222222`"], "Output",
  CellChangeTimes->{
   3.6792300203396544`*^9, {3.679230702925228*^9, 3.6792307239221797`*^9}, {
    3.6792308046225843`*^9, 3.6792308182832985`*^9}, 3.6792311379357176`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"sunset", " ", "=", " ", 
+  RowBox[{"Sunset", "[", 
+   RowBox[{
+    RowBox[{"GeoPosition", "[", 
+     RowBox[{"{", 
+      RowBox[{"51.546545", ",", "4.411744"}], "}"}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"2016", ",", "7", ",", "5"}], "}"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"d", " ", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"UnixTime", "[", "sunset", "]"}], ")"}], "/", 
+     RowBox[{"(", 
+      RowBox[{"3600", "*", "24"}], ")"}]}], "-", "0.5", "-", "10957"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"NumberForm", "[", 
+  RowBox[{"d", ",", "16"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"FromUnixTime", "[", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"d", " ", "+", " ", "10957.5"}], ")"}], "*", "3600", "*", "24"}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.67923213944699*^9, 3.679232151446808*^9}, {
+  3.6792366192203364`*^9, 3.6792366324256697`*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{RowBox[{"\"Tue 5 Jul 2016 23:02\"", 
+     StyleBox[
+      RowBox[{"\"GMT+\"", "\[InvisibleSpace]", "3.`"}], FontColor -> 
+      GrayLevel[0.5]]}],RowBox[{"DateObject", "[", 
+     RowBox[{
+       RowBox[{"{", 
+         RowBox[{"2016", ",", "7", ",", "5"}], "}"}], ",", 
+       RowBox[{"TimeObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"23", ",", "2"}], "}"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", "3.`"}]}], "]"}], ",", 
+       RowBox[{"TimeZone", "\[Rule]", "3.`"}]}], "]"}]},
+  "DateObject",
+  Editable->False]], "Output",
+ CellChangeTimes->{
+  3.6792321548441086`*^9, 3.6792322584425464`*^9, {3.6792366208201275`*^9, 
+   3.6792366333675528`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  InterpretationBox["\<\"6030.334722222221\"\>",
+   6030.334722222222,
+   AutoDelete->True],
+  NumberForm[#, 16]& ]], "Output",
+ CellChangeTimes->{
+  3.6792321548441086`*^9, 3.6792322584425464`*^9, {3.6792366208201275`*^9, 
+   3.6792366333885393`*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{RowBox[{"\"Tue 5 Jul 2016 23:02:00\"", 
+     StyleBox[
+      RowBox[{"\"GMT+\"", "\[InvisibleSpace]", "3.`"}], FontColor -> 
+      GrayLevel[0.5]]}],RowBox[{"DateObject", "[", 
+     RowBox[{
+       RowBox[{"{", 
+         RowBox[{"2016", ",", "7", ",", "5"}], "}"}], ",", 
+       RowBox[{"TimeObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"23", ",", "2", ",", "0.`"}], "}"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", "3.`"}]}], "]"}], ",", 
+       RowBox[{"TimeZone", "\[Rule]", "3.`"}]}], "]"}]},
+  "DateObject",
+  Editable->False]], "Output",
+ CellChangeTimes->{
+  3.6792321548441086`*^9, 3.6792322584425464`*^9, {3.6792366208201275`*^9, 
+   3.679236633394533*^9}}]
 }, Open  ]]
 },
 WindowSize->{942, 960},
@@ -208,15 +296,21 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[580, 22, 2342, 43, 132, "Input"],
-Cell[2925, 67, 1565, 29, 41, "Output"],
-Cell[4493, 98, 1565, 29, 41, "Output"]
+Cell[580, 22, 2532, 45, 132, "Input"],
+Cell[3115, 69, 1695, 31, 41, "Output"],
+Cell[4813, 102, 1696, 31, 41, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[6095, 132, 1106, 28, 92, "Input"],
-Cell[7204, 162, 769, 18, 41, "Output"],
-Cell[7976, 182, 210, 3, 31, "Output"],
-Cell[8189, 187, 218, 3, 64, "Output"]
+Cell[6546, 138, 1127, 28, 92, "Input"],
+Cell[7676, 168, 769, 18, 41, "Output"],
+Cell[8448, 188, 210, 3, 31, "Output"],
+Cell[8661, 193, 218, 3, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8916, 201, 944, 27, 92, "Input"],
+Cell[9863, 230, 721, 18, 41, "Output"],
+Cell[10587, 250, 275, 8, 45, "Output"],
+Cell[10865, 260, 734, 18, 41, "Output"]
 }, Open  ]]
 }
 ]

@@ -57,8 +57,8 @@ void setup () {
 
   long times[2];
   getTimes(&times[0],locationLatitude,locationLongitude);
-  Serial.println(times[0]);
-  Serial.println(times[1]);
+  Serial.println(times[0]); //should print 6029649
+  Serial.println(times[1]); //6030335
 }
 
 void loop () {
@@ -177,16 +177,6 @@ void getTimes(long *times, double locationLatitude,
     double dec = declination(L, 0); //uses asin
     double Jnoon = solarTransitJ(ds, M, L);
 
-    //TODO
-    /*
-    make sure the values are as below
-
-    given getSetJ precise as in js:
-    dec needs 0.3970
-    L needs 114.90 //done
-    (getSetJ) w needs 2.158
-    */
-
     //result
     double h = -0.833 * rad;
     Serial.println(h); //-0.0145
@@ -202,8 +192,8 @@ void getTimes(long *times, double locationLatitude,
     //10 is about 15mins, 1 about 1.5 mins (accurate enough)
 
     //convert to seconds since epoch
-    times[0] = (long) fromJulian(Jrise);
-    times[1] = (long) fromJulian(Jset);
+    times[0] = (long) secondsToDays(fromJulian(Jrise))*1000;
+    times[1] = (long) secondsToDays(fromJulian(Jset))*1000;
 
 }
 
