@@ -192,8 +192,8 @@ void getTimes(long *times, double locationLatitude,
     //10 is about 15mins, 1 about 1.5 mins (accurate enough)
 
     //convert to seconds since epoch
-    times[0] = (long) secondsToDays(fromJulian(Jrise))*1000;
-    times[1] = (long) secondsToDays(fromJulian(Jset))*1000;
+    times[0] = (long) (secondsToDays(fromJulian(Jrise))*1000);
+    times[1] = (long) (secondsToDays(fromJulian(Jset))*1000);
 
 }
 
