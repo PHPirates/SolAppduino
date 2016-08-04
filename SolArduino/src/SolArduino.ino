@@ -190,6 +190,12 @@ void getTimes(long *times, double locationLatitude,
     unsigned long Jset = getSetJ(h, lw, phi, dec, n, M, L);
     unsigned long Jrise = Jnoon - (Jset - Jnoon);
     //10 is about 15mins, 1 about 1.5 mins (accurate enough)
+    Serial.println(Jset);
+    Serial.println(Jrise);
+    Serial.println(fromJulian(Jset));
+    Serial.println(fromJulian(Jrise));
+    Serial.println(secondsToDays(fromJulian(Jset)));
+    Serial.println(secondsToDays(fromJulian(Jrise)));
 
     //convert to seconds since epoch
     times[0] = (long) (secondsToDays(fromJulian(Jrise))*1000);
