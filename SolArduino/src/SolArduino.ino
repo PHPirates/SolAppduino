@@ -85,14 +85,14 @@ void getSunPosition(double *position, double locationLatitude,
     position[1] = altitude(h, phi, sun[0]);
 
     for (size_t i = 0; i < 2; i++) {
-      Serial.print(position[i]);
-      Serial.println(" rad");
+      // Serial.print(position[i]);
+      // Serial.println(" rad");
     }
 
     for (size_t i = 0; i < 2; i++) {
       position[i] = position[i] * 180 / PI;
-      Serial.print(position[i]);
-      Serial.println(" degree");
+      // Serial.print(position[i]);
+      // Serial.println(" degree");
     }
 }
 
@@ -179,14 +179,14 @@ void getTimes(long *times, double locationLatitude,
 
     //result
     double h = -0.833 * rad;
-    Serial.println(h); //-0.0145
-    Serial.println(lw); //-0.08
-    Serial.println(phi); //0.90
-    Serial.println(dec); //0.30 //uses asin
-    Serial.println(n); //6030
-    Serial.println(M); //109.97
-    Serial.println(L); //114.90
-    Serial.println();
+    // Serial.println(h); //-0.0145
+    // Serial.println(lw); //-0.08
+    // Serial.println(phi); //0.90
+    // Serial.println(dec); //0.30 //uses asin
+    // Serial.println(n); //6030
+    // Serial.println(M); //109.97
+    // Serial.println(L); //114.90
+    // Serial.println();
     unsigned long Jset = getSetJ(h, lw, phi, dec, n, M, L);
     unsigned long Jrise = Jnoon - (Jset - Jnoon);
     //10 is about 15mins, 1 about 1.5 mins (accurate enough)
