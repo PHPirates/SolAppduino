@@ -119,10 +119,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         setAngle = (Button) findViewById(R.id.setAngle);
 
         autoBox = (CheckBox) findViewById(R.id.autoBox);
-        autoBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        //clicklistener instead of OnCheckedChange won't register sliding a switch
+        //but this way when toggling the button from somewhere else the clicklistener isn't called
+        autoBox.setOnClickListener(new CompoundButton.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b) {
+            public void onClick(View v) {
+                if(autoBox.isChecked()) {
                     urlString = ipString + "?panel=auto";
 //                    Toast.makeText(getBaseContext(), "Auto mode switched on.", Toast.LENGTH_SHORT).show();
                     startHttpRequest();
@@ -325,8 +327,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
      */
     public void sendDirectionRequest(String direction) {
         urlString = ipString + "?panel=" + direction;
-//        String urlString = "http://www.google.com";
-//        urlString = "http://pannenkoekenwagen.nl/pkw/test.html";
         startHttpRequest(); //urlString will be used here
 
     }
@@ -339,6 +339,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
      * hang the UI thread and crash the app
      */
     public void startHttpRequest() {
+        Log.e("sending ",urlString);
         final SendPingTask sendPing = new SendPingTask();
         sendPing.execute(host);
         //start a new handler that will cancel the AsyncTask after 2 seconds
