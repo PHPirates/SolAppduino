@@ -251,18 +251,21 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                         // until the solar panels reached the angle that is on the seekbar at that moment
                         final Timer timer = new Timer();
                         final TimerTask task = new TimerTask() {
-
-                            // String containing the current angle, taken from
-                            // (TextView) currentAngle, minus the degree symbol, trimmed to remove
-                            // possible spaces ("9 \u00b0" -> "9")
-                            String angleString = (currentAngle.getText().toString())
-                                    .substring(0,2)
-                                    .trim();
-
-                            int angleInt = Integer.valueOf(angleString);
-//                            int seekBarProgress = seekbar.getProgress(); // value seekbar
                             @Override
                             public void run() {
+                                // String containing the current angle, taken from
+                                // (TextView) currentAngle, minus the degree symbol, trimmed to remove
+                                // possible spaces ("9 \u00b0" -> "9")
+
+                                String angleString = currentAngle.getText().toString();
+                                if (angleString.length()<3) {
+                                    angleString = angleString.substring(0,1); //if only one digit
+                                } else {
+                                    angleString = angleString.substring(0,2);
+                                }
+
+                                int angleInt = Integer.valueOf(angleString);
+//                              int seekBarProgress = seekbar.getProgress(); // value seekbar
 //                                Log.e("angles", "current " + angleInt + " seekbar " + seekBarProgress);
 
                                 if(angleInt == seekbarProgress) {
