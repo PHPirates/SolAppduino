@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     String urlString;
     String ipString = "http://192.168.2.106/"; // IP Thomas
-//    String ipString = "http://192.168.0.23/"; // IP Abby
+//    String ipString = "http://192.168.0.23/"; // IP Abby is obsolete.
     String host = "192.168.2.106"; // host Thomas
 //    String host = "192.168.0.23"; // host Abby
 //    String ipString = "http://192.168.2.107"; // IP test
