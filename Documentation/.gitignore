@@ -1,8 +1,0 @@
-*.aux
-*.log
-*.out
-.pdf
-*.synctex.gz
-*.toc
-/Mathematica/AbbyTest.nb
-/Mathematica/ThomasTest.nb
